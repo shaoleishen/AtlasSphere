@@ -1,6 +1,3 @@
-<p align="center">
-  <img src="https://via.placeholder.com/1200x300/1e1e1e/ffffff?text=AtlasSphere:+A+Clean+Room+Engine+for+AI+Bio-Agents" alt="AtlasSphere Banner">
-</p>
 
 <h1 align="center">🌌 AtlasSphere</h1>
 
