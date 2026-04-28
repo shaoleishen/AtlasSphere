@@ -30,30 +30,6 @@
 
 ---
 
-## 🧬 Agentic Code Evolution 管线 (重磅架构)
-
-您是否想拥有一个自己会学习写新生物计算流程的系统？AtlasSphere 是业界罕有的通过多智能体协作、自带基准测试场并能自我改写的动态枢纽！
-
-```mermaid
-graph TD
-    A[用户输入: "我要用最新算法进行细胞通讯分析"] --> B(API Gateway / MCP Server)
-    B -- 发现现有工具库缺失 --> C(Evolve Orchestrator)
-    
-    subgraph 🛡️ The Arsenal (智能体锻造核心)
-    C --> D[Coder Agent 探索并生成全新 Pydantic + Lazy 内部模块]
-    D --> E{AST 安全嗅探器}
-    E -- 含 os.system 等禁区 --> D
-    E -- 语法过关 --> F(干跑测试区 Sandbox)
-    end
-    
-    F -->|灌入 PBMC3k 基准数据集| G{计算是否抛出异常?}
-    G -- Yes / OOM故障 --> C
-    G -- No / 流程通畅顺滑 --> H[(固化存入 /plugins/dynamic)]
-    H --> I((🚀 Control Plane 热加载))
-    I -- 广播上线 --> B
-```
-
----
 
 ## 🚀 极其精简的部署 (10 秒极速拉起)
 
