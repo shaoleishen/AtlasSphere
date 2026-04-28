@@ -1,0 +1,37 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "atlassphere"
+version = "0.1.0"
+description = "Clean Room rewrite of an agentic bio-platform with Multi-Head capabilities (MCP + REST)."
+requires-python = ">=3.10"
+readme = "README.md"
+authors = [
+    { name = "Genomic Innovators", email = "hello@bio.ai" }
+]
+
+dependencies = [
+    "fastapi>=0.100.0",
+    "uvicorn>=0.20.0",
+    "pydantic>=2.0",
+    "litellm>=1.0.0",
+    "mcp>=1.0.0",      
+    "loguru>=0.7.0"
+]
+
+[project.optional-dependencies]
+# 执行大型组学分析真正需要的重量级底座，按需在沙箱环境里安装以减负。
+omics = [
+    "scanpy>=1.9.0",
+    "anndata>=0.10.0"
+]
+
+[project.scripts]
+# CLI 快捷调度（作为 MCP 的入口）
+atlas-mcp = "atlassphere.mcp_server.server:main"
+atlas-api = "atlassphere.gateway.server:start"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/atlassphere"]
