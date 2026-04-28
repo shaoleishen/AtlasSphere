@@ -3,130 +3,35 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "bioclaw"
+name = "atlassphere"
 version = "0.1.0"
-description = "AI-Powered Single-Cell and Spatial Transcriptomics Analysis Platform"
-readme = "README.md"
-license = {text = "MIT"}
+description = "Clean Room rewrite of an agentic bio-platform with Multi-Head capabilities (MCP + REST)."
 requires-python = ">=3.10"
+readme = "README.md"
 authors = [
-    {name = "BioClaw Team"},
-]
-keywords = [
-    "single-cell",
-    "spatial-transcriptomics",
-    "bioinformatics",
-    "ai-agent",
-    "scRNA-seq",
-    "Visium",
-    "MERFISH",
-]
-classifiers = [
-    "Development Status :: 3 - Alpha",
-    "Intended Audience :: Science/Research",
-    "License :: OSI Approved :: MIT License",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
-    "Programming Language :: Python :: 3.12",
-    "Topic :: Scientific/Engineering :: Bio-Informatics",
+    { name = "Genomic Innovators", email = "hello@bio.ai" }
 ]
 
 dependencies = [
-    # Core framework (from PantheonOS)
+    "fastapi>=0.100.0",
+    "uvicorn>=0.20.0",
     "pydantic>=2.0",
-    "funcdesc>=0.1.0",
-    "loguru>=0.7.0",
-    
-    # LLM integration
     "litellm>=1.0.0",
-    "openai>=1.0.0",
-    "anthropic>=0.30.0",
-    
-    # Single-cell analysis (from OmicVerse/Scanpy)
-    "scanpy>=1.9.0",
-    "anndata>=0.10.0",
-    "scvi-tools>=1.0.0",
-    "scikit-misc>=0.3.0",
-    "harmonypy>=0.0.6",
-    "bbknn>=1.6.0",
-    "scanorama>=1.7.0",
-    "scib>=1.1.0",
-    
-    # Spatial transcriptomics
-    "squidpy>=1.3.0",
-    "spatialdata>=0.1.0",
-    "napari-spatialdata>=0.4.0",
-    
-    # Visualization
-    "matplotlib>=3.7.0",
-    "seaborn>=0.12.0",
-    "plotly>=5.0.0",
-    "altair>=5.0.0",
-    
-    # Data processing
-    "numpy>=1.24.0",
-    "pandas>=2.0.0",
-    "scipy>=1.11.0",
-    "scikit-learn>=1.3.0",
-    
-    # Foundation models
-    "torch>=2.0.0",
-    "transformers>=4.30.0",
-    "accelerate>=0.20.0",
-    
-    # Utilities
-    "tqdm>=4.65.0",
-    "rich>=13.0.0",
-    "typer>=0.9.0",
-    "pyyaml>=6.0",
-    "python-dotenv>=1.0.0",
+    "mcp>=1.0.0",      
+    "loguru>=0.7.0"
 ]
 
 [project.optional-dependencies]
-dev = [
-    "pytest>=7.0.0",
-    "pytest-asyncio>=0.21.0",
-    "pytest-cov>=4.0.0",
-    "black>=23.0.0",
-    "ruff>=0.1.0",
-    "mypy>=1.5.0",
-    "pre-commit>=3.0.0",
-]
-
-all = [
-    "bioclaw[dev]",
+# 执行大型组学分析真正需要的重量级底座，按需在沙箱环境里安装以减负。
+omics = [
+    "scanpy>=1.9.0",
+    "anndata>=0.10.0"
 ]
 
 [project.scripts]
-bioclaw = "bioclaw.cli:main"
-
-[project.urls]
-Homepage = "https://github.com/bioshen/bioclaw"
-Documentation = "https://bioclaw.readthedocs.io"
-Repository = "https://github.com/bioshen/bioclaw"
+# CLI 快捷调度（作为 MCP 的入口）
+atlas-mcp = "atlassphere.mcp_server.server:main"
+atlas-api = "atlassphere.gateway.server:start"
 
 [tool.hatch.build.targets.wheel]
-packages = ["bioclaw"]
-
-[tool.black]
-line-length = 100
-target-version = ['py310', 'py311', 'py312']
-
-[tool.ruff]
-line-length = 100
-target-version = "py310"
-
-[tool.ruff.lint]
-select = ["E", "F", "I", "N", "W", "UP", "B", "C4", "SIM"]
-ignore = ["E501"]
-
-[tool.mypy]
-python_version = "3.10"
-warn_return_any = true
-warn_unused_configs = true
-disallow_untyped_defs = true
-
-[tool.pytest.ini_options]
-testpaths = ["tests"]
-asyncio_mode = "auto"
+packages = ["src/atlassphere"]
